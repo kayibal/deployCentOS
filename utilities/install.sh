@@ -8,7 +8,7 @@ cp autoVenv.sh /usr/local/share/autoVenv.sh
 cp custom.sh /usr/local/share/custom.sh
 chmod 755 /usr/local/share/custom.sh
 chmod 755 /usr/local/share/autoVenv.sh
-echo '. /usr/local/share/custom.sh' >> /etc/bashrc
+echo 'source /usr/local/share/custom.sh' >> /etc/bashrc
 
 
 #activate all changes

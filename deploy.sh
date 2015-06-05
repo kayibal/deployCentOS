@@ -1,6 +1,6 @@
 #!/bin/sh
-set -xe
-. config.sh
+set -e
+source config.sh
 
 echo '----------- Configuration --------------'
 echo 'User: '$DJANGO_USER
@@ -24,16 +24,16 @@ echo 'DB_Pass: '$DB_PW
 #cd deployCentOs
 
 #install python 2.7, apache, mod_wsgi
-. python/install.sh
+source python/install.sh
 
 #utilities and bash aliases and variables
 cd utilities
-. install.sh
+source install.sh
 cd ..
 
 #install maria db
 cd MariaDB
-. install.sh
+source install.sh
 cd ..
 
 #setup django deployement for given APPNAME
@@ -86,6 +86,7 @@ chown -R $DJANGO_USER:$DJANGO_USER $BASE_URL
 rm -r -f ~/deployCentOS
 
 #prepare for db sync and static file collect
+echo "DONE"
 vim -c /DATABASES $APPNAME/settings.py
 #./manage.py makemigrations
 #./manage.py migrate
