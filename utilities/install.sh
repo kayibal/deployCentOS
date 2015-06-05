@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "alias phome=$BASE_URL/$GIT_FOLDER" >> custom.sh
+echo "alias phome=cd $BASE_URL/$GIT_FOLDER" >> custom.sh
 #Virtualenv configuration
 mkdir -p /usr/local/share/.virtualenvs
 chmod -R 755 /usr/local/share/.virtualenvs

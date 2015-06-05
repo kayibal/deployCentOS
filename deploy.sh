@@ -2,7 +2,7 @@
 set -e
 source ./config.sh
 
-echo '----------- Configuration --------------'
+printf '\n\n----------- Configuration --------------\n\n'
 echo 'User: '$DJANGO_USER
 echo 'App Name: '$APPNAME
 echo 'Git Folder: '$GIT_FOLDER
@@ -12,7 +12,7 @@ echo 'Python Version: '$PYTHON_VERSION
 echo 'DB Name: '$DB_NAME
 echo 'DB_User: '$DB_USER
 echo 'DB_Pass: '$DB_PW
-
+printf "\n\n\n\n"
 #Deploys a CentOS Server ready for django production use
 #yum install git -y
 
@@ -21,10 +21,10 @@ echo 'DB_Pass: '$DB_PW
 
 ### run script from here on server
 
-#cd deployCentOs
-
+base=$(pwd)
 #install python 2.7, apache, mod_wsgi
 source ./python/install.sh
+cd $base
 
 #utilities and bash aliases and variables
 cd utilities
@@ -36,6 +36,11 @@ cd MariaDB
 source ./install.sh
 cd ..
 
+printf "\n\n--------DATABASE READY----------\n\n"
+
+echo ""
+
+printf "\n\n--------CREATING USER FOR DJANGO HOSTING--------\n\n"
 #setup django deployement for given APPNAME
 adduser $DJANGO_USER
 passwd $DJANGO_USER
@@ -70,14 +75,15 @@ ip=$(curl -s ifconfig.me)
 echo "ServerName "$ip >> /etc/httpd/conf/httpd.conf
 service httpd restart
 
+printf "\n\n---------Almost done! checking out source code from git-------------\n\n"
+
 #setup virtualenv and requirements
 mkdir -p $BASE_URL
 cd $BASE_URL
 git clone $GIT_URL $GIT_FOLDER
 cd $GIT_FOLDER
-mkvirtualenv $APPNAME
+mkvirtualenv -r requirements.txt $APPNAME || true
 echo $APPNAME > .venv
-pip install -r requirements.txt
 
 usermod -a -G $DJANGO_USER apache
 chmod 710 $BASE_URL/$GIT_FOLDER
