@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-source config.sh
+source ./config.sh
 
 echo '----------- Configuration --------------'
 echo 'User: '$DJANGO_USER
@@ -24,16 +24,16 @@ echo 'DB_Pass: '$DB_PW
 #cd deployCentOs
 
 #install python 2.7, apache, mod_wsgi
-source python/install.sh
+source ./python/install.sh
 
 #utilities and bash aliases and variables
 cd utilities
-source install.sh
+source ./install.sh
 cd ..
 
 #install maria db
 cd MariaDB
-source install.sh
+source ./install.sh
 cd ..
 
 #setup django deployement for given APPNAME
