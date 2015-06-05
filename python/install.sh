@@ -3,18 +3,6 @@
 # ./install_python.sh
 
 #!/bin/sh
-echo '----------- Configuration in Python --------------'
-echo 'User: '$DJANGO_USER
-echo 'App Name: '$APPNAME
-echo 'Git Folder: '$GIT_FOLDER
-echo 'Git Clone Url: '$GIT_URL
-echo 'Base Directory: '$BASE_URL
-echo 'Python Version: '$PYTHON_VERSION
-echo 'DB Name: '$DB_NAME
-echo 'DB_User: '$DB_USER
-echo 'DB_Pass: '$DB_PW
-
-asdafa
 
 echo "******************************************"
 echo "Configure Centos box with a recent version"
