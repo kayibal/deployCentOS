@@ -23,7 +23,7 @@ printf "\n\n\n\n"
 
 base=$(pwd)
 #install python 2.7, apache, mod_wsgi
-source ./python/install.sh
+#source ./python/install.sh
 cd $base
 
 #utilities and bash aliases and variables
