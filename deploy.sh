@@ -57,7 +57,7 @@ echo "WSGIDaemonProcess $APPNAME python-path=$BASE_URL/$GIT_FOLDER/$APPNAME:/usr
 echo "WSGIProcessGroup $APPNAME"																													>> /etc/httpd/conf.d/django.conf
 echo "WSGIScriptAlias / $BASE_URL/$GIT_FOLDER/$APPNAME/wsgi.py"																			>> /etc/httpd/conf.d/django.conf
 
-ip='curl -s ifconfig.me'
+ip=$(curl -s ifconfig.me)
 echo "ServerName "$ip >> /etc/httpd/conf/httpd.conf
 service httpd restart
 
