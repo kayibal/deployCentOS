@@ -2,6 +2,17 @@
 set -xe
 . config.sh
 
+echo '----------- Configuration --------------'
+echo 'User: '$DJANGO_USER
+echo 'App Name: '$APPNAME
+echo 'Git Folder: '$GIT_FOLDER
+echo 'Git Clone Url: '$GIT_URL
+echo 'Base Directory: '$BASE_URL
+echo 'Python Version: '$PYTHON_VERSION
+echo 'DB Name: '$DB_NAME
+echo 'DB_User: '$DB_USER
+echo 'DB_Pass: '$DB_PW
+
 #Deploys a CentOS Server ready for django production use
 #yum install git -y
 
