@@ -1,6 +1,6 @@
 #!/bin/sh
-
-./config.sh
+set -xe
+. config.sh
 
 #Deploys a CentOS Server ready for django production use
 #yum install git -y
@@ -12,32 +12,30 @@
 
 #cd deployCentOs
 
-
-#utilities and bash aliases and variables
-cd utilities
-./install.sh
-cd ..
-
 #install python 2.7, apache, mod_wsgi
 python/install.sh
 
-#install maria db
-cd MariaDB
-./install.sh
+#utilities and bash aliases and variables
+cd utilities
+. install.sh
 cd ..
 
+#install maria db
+cd MariaDB
+. install.sh
+cd ..
 
 #setup django deployement for given APPNAME
-adduser $USER
-passwd $USER
-echo "$USER ALL=(ALL:ALL) ALL" >> /etc/sudoers
+adduser $DJANGO_USER
+passwd $DJANGO_USER
+echo "$DJANGO_USER ALL=(ALL:ALL) ALL" >> /etc/sudoers
 
 #TODO configure ssh
-mkdir -p /home/$USER/.ssh
-chmod 700 /home/$USER/.ssh
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChAITG6v/lL5Q0FJcN9Jn/6+2q9LC1d5eevoe4BNX8mImlQHUtn+ytuqgRDyjuwSp/rwAoFlnGTjCrsHm3DjgZdkjsxZBtCh+ulDwcaTupgEX+ItMvyUjPU8auxVxXiV3CNr1Oz/UEVwJt6zL5CxsWQf0D44wuPksLuJDZltavweGff4lJTQBKWJooq7yTvYIYUvIdkqNllG4IElFKqVzdzdYdIIWYO+jll0C8vUgf2hE6GAsUrTiX0Hv0JSADU5cKrAk13yg7+7V3VKI5OsUSdwfA9xHGUEi2hpjy0wzy2fOjdfHNxfFERumsyffUvR9dPYryCglc9Tyz3n/oDYqr Alan@Alans-MacBook-Pro.local" > /home/$USER/.ssh/authorized_keys
-chmod 600 /home/$USER/.ssh/authorized_keys
-chmod 755 /home/$USER
+mkdir -p /home/$DJANGO_USER/.ssh
+chmod 700 /home/$DJANGO_USER/.ssh
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChAITG6v/lL5Q0FJcN9Jn/6+2q9LC1d5eevoe4BNX8mImlQHUtn+ytuqgRDyjuwSp/rwAoFlnGTjCrsHm3DjgZdkjsxZBtCh+ulDwcaTupgEX+ItMvyUjPU8auxVxXiV3CNr1Oz/UEVwJt6zL5CxsWQf0D44wuPksLuJDZltavweGff4lJTQBKWJooq7yTvYIYUvIdkqNllG4IElFKqVzdzdYdIIWYO+jll0C8vUgf2hE6GAsUrTiX0Hv0JSADU5cKrAk13yg7+7V3VKI5OsUSdwfA9xHGUEi2hpjy0wzy2fOjdfHNxfFERumsyffUvR9dPYryCglc9Tyz3n/oDYqr Alan@Alans-MacBook-Pro.local" > /home/$DJANGO_USER/.ssh/authorized_keys
+chmod 600 /home/$DJANGO_USER/.ssh/authorized_keys
+chmod 755 /home/$DJANGO_USER
 
 #now configure apache and mod_wsgi
 touch /etc/httpd/conf.d/django.conf
@@ -70,9 +68,9 @@ mkvirtualenv $APPNAME
 echo $APPNAME > .venv
 pip install -r requirements.txt
 
-usermod -a -G $USER apache
+usermod -a -G $DJANGO_USER apache
 chmod 710 $BASE_URL/$GIT_FOLDER
-chown -R $USER:$USER $BASE_URL
+chown -R $DJANGO_USER:$DJANGO_USER $BASE_URL
 #clean up
 rm -r -f ~/deployCentOS
 
