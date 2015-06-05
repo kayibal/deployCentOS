@@ -1,21 +1,18 @@
 #!/bin/sh
 
-#set python version
-echo 'alias python=python2.7' >> /etc/bash.bashrc
-cp autoVenv.sh usr/local/share/autoVenv.sh
+echo "alias phome=$BASE_URL/$GIT_FOLDER" >> custom.sh
 #Virtualenv configuration
-mkdir usr/local/share/.virtualenvs
-chmod -R 755 usr/local/share/.virtualenvs
-echo 'export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7' >> /etc/bash.bashrc
-echo 'export WORKON_HOME=usr/local/share/.virtualenvs' >> /etc/bash.bashrc
-echo 'export PROJECT_HOME=$HOME/projects' >> ~/etc/bash.bashrc
-echo 'source /opt/python2.7.1/bin/virtualenvwrapper.sh' >> /etc/bash.bashrc
-#Auto activation of venv when in folder
-echo 'source usr/local/share/autoVenv.sh' >> /etc/bash.bashrc
+mkdir -p /usr/local/share/.virtualenvs
+chmod -R 755 /usr/local/share/.virtualenvs
+cp autoVenv.sh /usr/local/share/autoVenv.sh
+cp custom.sh /usr/local/share/custom.sh
+chmod 755 /usr/local/share/custom.sh
+chmod 755 /usr/local/share/autoVenv.sh
+echo '. /usr/local/share/custom.sh' >> /etc/bashrc
 
-#some customs aliases and functions
-echo 'alias ..=cd ..' >> /etc/bash.bashrc
-echo 'alias ...=cd ../..' >> /etc/bash.bashrc
+
+#activate all changes
+source /usr/local/share/custom.sh
 
 #User tools
 yum install mlocate -y

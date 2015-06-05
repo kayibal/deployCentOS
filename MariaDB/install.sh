@@ -6,4 +6,5 @@ service mysql start
 chkconfig mysql on
 mysql_secure_installation
 service mysql restart
-mysql -u root -p
+mysql -u root -p <<< "CREATE DATABASE IF NOT EXISTS $DB_NAME; CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PW'; GRANT ALL PRIVILEGES ON $DB_NAME . * TO '$DB_USER'@'localhost'; FLUSH PRIVILEGES;"
+#mysql -u root -p

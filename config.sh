@@ -1,0 +1,10 @@
+#Configurations
+USER='alan'
+APPNAME='busao'
+GIT_FOLDER='busding'
+GIT_URL='https://kayibal@github.com/rgherdt/busding.git'
+BASE_URL="/home/$USER"
+PYTHON_VERSION='2.7'
+DB_NAME='busao'
+DB_USER='busao'
+DB_PW='pokemania'
