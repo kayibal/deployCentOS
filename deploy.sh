@@ -13,7 +13,7 @@ set -xe
 #cd deployCentOs
 
 #install python 2.7, apache, mod_wsgi
-python/install.sh
+. python/install.sh
 
 #utilities and bash aliases and variables
 cd utilities
