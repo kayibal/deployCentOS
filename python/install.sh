@@ -49,11 +49,6 @@ echo " - Pipe alias into .zshrc "
 echo "alias python=/opt/python2.7.1/bin/python" >> ~/.zshrc
 source ~/.zshrc
 
-# wget -O install_python.sh https://gist.github.com/raw/777001/install_python.sh
-# chmod +x install_python.sh
-# ./install_python.sh
-
-#!/bin/sh
 
 echo "******************************************"
 echo "Configure Centos box with apache and "
@@ -79,8 +74,8 @@ echo " # pipe module into httpd config"
 echo "LoadModule wsgi_module /usr/lib64/httpd/modules/mod_wsgi.so" >> /etc/httpd/conf/httpd.conf
 service httpd restart
 
-#symlinking python library for gcc
+echo "symlinking python library for gcc"
 ln -s /opt/python2.7.1/lib/python2.7/config/libpython2.7.a /usr/local/lib
 
-#installing virtualenvwrapper
+echo "installing virtualenvwrapper"
 pip install virtualenvwrapper
